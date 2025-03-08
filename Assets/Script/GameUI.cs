@@ -1,8 +1,13 @@
 using UnityEngine;
 using TMPro;
+using System.Runtime.InteropServices;
 
 public class GameUI : MonoBehaviour
 {
+        [DllImport("__Internal")]
+  private static extern void SetScore (int score);
+
+
     public TMP_Text scoreText;
     public TMP_Text prevScoreText;
 
@@ -32,6 +37,12 @@ public class GameUI : MonoBehaviour
     public void AddScore(){
         score++;
         scoreText.text = score.ToString();
+
+        #if UNITY_WEBGL == true && UNITY_EDITOR == false
+            SetScore(score);
+        #endif
+
+       
     }
 
 
@@ -43,5 +54,13 @@ public class GameUI : MonoBehaviour
         }
         
         prevScoreText.text = maxScore.ToString();
+    }
+
+
+
+    // 紀錄最高分數
+    public void SetMaxScore(int newScore){
+        maxScore = newScore;
+        prevScoreText.text = newScore.ToString();
     }
 }

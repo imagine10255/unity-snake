@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Snake : MonoBehaviour
 {
+
     public GameUI gameUI;
     public GameAudio gameAudio;
     
@@ -110,5 +112,11 @@ public class Snake : MonoBehaviour
 
             gameUI.ResetScore();
     }
+
+    // 設定最高分數並且測試 React 呼叫 Unity方法
+       public void SpawnEnemies (int score) {
+         gameUI.SetMaxScore(score);
+        }
+
 
 }
